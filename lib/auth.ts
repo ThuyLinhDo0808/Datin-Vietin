@@ -5,7 +5,7 @@ const baseURL = process.env.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https:
 const origins = [baseURL, 'http://localhost:3000', process.env.V0_DEV_APP_URL, process.env.V0_BUILD_URL, process.env.V0_SANDBOX_URL].filter(Boolean) as string[]
 
 export const auth = betterAuth({
-  database: new Pool({ connectionString: process.env.DATABASE_URL, options: '-c search_path=neon_auth,public' }),
+  database: new Pool({ connectionString: process.env.DATABASE_URL_UNPOOLED || process.env.DATABASE_URL, options: '-c search_path=neon_auth,public' }),
   baseURL,
   trustedOrigins: origins,
   emailAndPassword: { enabled: true },
